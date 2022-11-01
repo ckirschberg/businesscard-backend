@@ -12,5 +12,6 @@ import { BusinessCardService } from './business-card.service';
   ],
   controllers: [BusinessCardController],
   providers: [BusinessCardService],
+  exports: [BusinessCardService]
 })
 export class BusinessCardModule {}
