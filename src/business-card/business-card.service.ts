@@ -23,4 +23,9 @@ export class BusinessCardService {
         // delete bc.
     }
 
+
+    deleteMany(deleteCriteria: any) {
+        return this.bcModel.deleteMany(deleteCriteria);
+    }
+
 }

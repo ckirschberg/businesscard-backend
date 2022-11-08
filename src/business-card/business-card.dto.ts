@@ -14,4 +14,12 @@ export class BusinessCardDto {
     about: string;
   
     interests: string
+
+    constructor(name: string, title: string, email: string, about: string, interests: string) {
+        this.name = name;
+        this.title = title;
+        this.email = email;
+        this.about = about;
+        this.interests = interests;
+    }
 }
