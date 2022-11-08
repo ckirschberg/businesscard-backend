@@ -43,12 +43,12 @@ describe('Business Card Controller (e2e)', () => {
   })
 
   describe("Get Businesscard controller", () => {
-    it("should get all businesscards", () => {
+    it("should get all businesscards", async () => {
         // Arrange
         const bc1 = new BusinessCardDto("1", "f", "fkdasælf@fjæak.dk", "fkjaæsfd", "akfjæd");
         const bc2 = new BusinessCardDto("1", "f", "fkdasælf@fjæak.dk", "fkjaæsfd", "akfjæd");
-        bcService.createBusinessCard(bc1)
-        bcService.createBusinessCard(bc2);
+        await bcService.createBusinessCard(bc1)
+        await bcService.createBusinessCard(bc2);
 
         //Act
         // call the endpoint to get all business cards
