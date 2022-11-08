@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { BusinessCardDto } from './business-card.dto';
 import { BusinessCard, BusinessCardDocument } from './business-card.schema';
 
 @Injectable()
@@ -11,7 +12,7 @@ export class BusinessCardService {
     getBusinessCards(): Promise<BusinessCard[]> {
         return this.bcModel.find().exec();
     }
-    createBusinessCard(businessCard: any) {
+    createBusinessCard(businessCard: BusinessCardDto) {
         const savedBC = new this.bcModel(businessCard);
         return savedBC.save();
     }

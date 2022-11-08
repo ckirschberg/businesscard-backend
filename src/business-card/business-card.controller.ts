@@ -2,6 +2,7 @@ import { Body, Controller, Delete, Get, Param, Post, Req } from '@nestjs/common'
 import { BusinessCardService } from './business-card.service';
 import { Request } from 'express';
 import { BusinessCard } from './business-card.schema';
+import { BusinessCardDto } from './business-card.dto';
 
 @Controller('businesscards')
 export class BusinessCardController {
@@ -14,9 +15,9 @@ export class BusinessCardController {
 
     @Get()
     async getBusinessCards(@Req() request: Request) : Promise<BusinessCard[]> {
-        console.log(request);
+        // console.log(request);
         const result: BusinessCard[] = await this.bcService.getBusinessCards();
-        console.log(result);
+        // console.log(result);
         
         return result;
     }
@@ -26,8 +27,8 @@ export class BusinessCardController {
     }
 
     @Post()
-    createBusinessCard(@Body() body) {
-        return this.bcService.createBusinessCard(body);
+    createBusinessCard(@Body() bcDto: BusinessCardDto) {
+        return this.bcService.createBusinessCard(bcDto);
     }
 
 
