@@ -8,9 +8,7 @@ import { TestGuard } from 'src/authentication/test.guard';
 @Controller('businesscards')
 export class BusinessCardController {
     
-    constructor(private readonly bcService: BusinessCardService) {
-
-    }
+    constructor(private readonly bcService: BusinessCardService) { }
 
     @UseGuards(TestGuard)
     @Get()
