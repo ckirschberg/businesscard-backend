@@ -1,10 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { INestApplication } from '@nestjs/common';
+import { INestApplication, ValidationPipe } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from './../src/app.module';
 import { TestModule } from './../src/test.module';
 import { BusinessCardDto } from './../src/business-card/business-card.dto';
-import { BusinessCardService } from 'src/business-card/business-card.service';
+import { BusinessCardService } from './../src/business-card/business-card.service';
 
 describe('Business Card Controller (e2e)', () => {
   let app: INestApplication;
@@ -21,6 +21,7 @@ describe('Business Card Controller (e2e)', () => {
 
     bcService = moduleFixture.get(BusinessCardService);
     app = moduleFixture.createNestApplication();
+    app.useGlobalPipes(new ValidationPipe());
     await app.init();
   });
 
@@ -32,11 +33,26 @@ describe('Business Card Controller (e2e)', () => {
         const result = await request(app.getHttpServer())
                         .post("/businesscards")
                         .send(bc)
-                        .expect(201)
-        // Assert
+                        .expect(201) // Assert
+        
+        
         const res = result.body;
         expect(res._id).toBeDefined();
         expect(res.__v).toEqual(0);
+      });
+
+      it('should create a new valid business card', async () => {
+        // Arrange
+        const bc = new BusinessCardDto("", "Adjunkt", "mtnl@cphbusiness.dk", "Hello", "Caring for little animals");
+        // Act
+        const result = await request(app.getHttpServer())
+                        .post("/businesscards")
+                        .send(bc)
+                        .expect(400) // Assert
+        
+        console.log(result);
+        expect(result.body.message[0]).toEqual('name should not be empty')
+        
       });
 
       
@@ -52,6 +68,8 @@ describe('Business Card Controller (e2e)', () => {
 
         //Act
         // call the endpoint to get all business cards
+        
+
 
         //Assert (expect)
         // tests that I get what I should get

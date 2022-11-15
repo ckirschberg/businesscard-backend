@@ -6,8 +6,7 @@ export class BusinessCardDto {
     name: string;
 
     title: string;
-
-    // @IsNotEmpty()
+    
     @IsEmail()
     email: string;
   

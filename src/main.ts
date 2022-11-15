@@ -9,6 +9,7 @@ async function bootstrap() {
   // Single page application setup
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe());
+  //app.useGlobalGuards(new TestGuard());
   
   
   // Round trip style application - Handlebars - Start

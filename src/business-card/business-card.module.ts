@@ -14,4 +14,9 @@ import { BusinessCardService } from './business-card.service';
   providers: [BusinessCardService],
   exports: [BusinessCardService]
 })
-export class BusinessCardModule {}
+export class BusinessCardModule {
+  constructor() {
+    const bc = new BusinessCard();
+    bc.name
+  }
+}

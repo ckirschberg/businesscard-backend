@@ -1,8 +1,9 @@
-import { Body, Controller, Delete, Get, Param, Post, Req } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Req, UseGuards } from '@nestjs/common';
 import { BusinessCardService } from './business-card.service';
 import { Request } from 'express';
 import { BusinessCard } from './business-card.schema';
 import { BusinessCardDto } from './business-card.dto';
+import { TestGuard } from 'src/authentication/test.guard';
 
 @Controller('businesscards')
 export class BusinessCardController {
@@ -11,8 +12,7 @@ export class BusinessCardController {
 
     }
 
-
-
+    @UseGuards(TestGuard)
     @Get()
     async getBusinessCards(@Req() request: Request) : Promise<BusinessCard[]> {
         // console.log(request);
