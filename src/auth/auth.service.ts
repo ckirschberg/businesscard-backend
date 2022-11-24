@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
-import { User } from 'src/users/user.schema';
+import { User, UserDocument } from 'src/users/user.schema';
 
 @Injectable()
 export class AuthService {
@@ -11,14 +11,15 @@ export class AuthService {
   ) {}
 
   async validateUser(username: string, pass: string): Promise<any> {
-    const user: User = await this.usersService.findOne(username);
+    const user: UserDocument = await this.usersService.findOne(username);
     
     if (user && user.password === pass) {
-        // delete user.password;
-        console.log("auth.service", user);    
-        // const { password, ...result } = user; // This does not do what it is supposed to do (remove the password and return the rest of the user object.)
-        console.log("auth.service2 result", user);
-        return user;
+        
+        console.log(user);
+        let { password, ...result } = user.toObject()
+        console.log(result);
+        
+        return result;
     }
     return null;
   }

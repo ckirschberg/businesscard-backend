@@ -14,12 +14,6 @@ export class AppController {
     private readonly bcService: BusinessCardService,
     private authService: AuthService) {}
 
-    @UseGuards(LocalAuthGuard)
-    @Post('auth/login')
-    async login(@Request() req) {
-      return this.authService.login(req.user);
-    }
-
     @UseGuards(JwtAuthGuard)
     @Get('profile')
     getProfile(@Request() req) {
