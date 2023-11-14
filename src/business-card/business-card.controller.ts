@@ -3,7 +3,7 @@ import { BusinessCardService } from './business-card.service';
 import { Request } from 'express';
 import { BusinessCard } from './business-card.schema';
 import { BusinessCardDto } from './business-card.dto';
-import { TestGuard } from 'src/authentication/test.guard';
+import { TestGuard } from './../authentication/test.guard';
 
 @Controller('businesscards')
 export class BusinessCardController {
